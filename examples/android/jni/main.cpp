@@ -93,6 +93,7 @@ int main(int argc, char *argv[])
     music.play();
 
     sf::View view = window.getDefaultView();
+    int tapCounter = 0;
 
     while (window.isOpen())
     {
@@ -114,6 +115,12 @@ int main(int argc, char *argv[])
                     if (event.touch.finger == 0)
                     {
                         image.setPosition(event.touch.x, event.touch.y);
+
+			if (++tapCounter >= 10) {
+                            // Closing the window will shutdown the app  
+			    window.close();
+			}
+
 #if defined(USE_JNI)
                         vibrate(sf::milliseconds(10));
 #endif
